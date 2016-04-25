@@ -43,15 +43,16 @@ class Playlist
         Playlist();
         virtual ~Playlist();
         bool createLib(); //reads in track information from txt file
-        bool readInTracks();
-        void addTrackToLib(std::string in_band, std::string in_cd, std::string in_title); //add individual track to music library
-        void addTrackToTree(Track *song, Track *tmp); //adds track to album tree
+
         void printLib();
         void printCDTree(Track *song);
+        void printLibByBand();
+        void printCDTreeSongOnly(Track* song);
         void searchLib();
         Track *searchLibByTrack(std::string song);
         void searchLibByCD();
-        void addToPL(); //
+        void searchLibByBand();
+        void addToPL(Track *in_song); //
         Track *addTrackToPL(std::string song);
         void addCDToPL();
         void removeFromPL();
@@ -76,7 +77,9 @@ class Playlist
         Track *headLib;
         int numTracks;
         std::deque<Track*> q;
-
+        bool readInTracks();
+        void addTrackToLib(std::string in_band, std::string in_cd, std::string in_title); //add individual track to music library
+        void addTrackToTree(Track *song, Track *tmp); //adds track to album tree
 
 
 

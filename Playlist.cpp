@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <deque>
 
 using namespace std;
@@ -22,34 +23,41 @@ bool Playlist::readInTracks(){
     std::string cd;
     std::string band;
     std::string textIn;
-    ifstream inFile("Final.txt");
+    ifstream inFile("Final4.txt");
     if(inFile.fail()){
         cout<<"There was a problem accessing the music library. Goodbye!"<<endl;
             return false;
     }
-    while (getline(inFile, band, ',')){
-        getline(inFile, cd, ',');
-        getline (inFile, title, '\n');
-        //cout<<"Band: "<<band<<" CD: "<<cd<<" Title: "<<title<<endl;
+
+    string s;
+    getline(inFile,s);
+    string pieceOfData;
+
+    while(getline(inFile,s)){
+        stringstream myStringStream(s);
+        getline(myStringStream, pieceOfData, ',');
+        band = pieceOfData;
+        getline(myStringStream, pieceOfData, ',');
+        cd = pieceOfData;
+        getline(myStringStream, pieceOfData, ',');
+        title = pieceOfData;
         addTrackToLib(band, cd, title);
     }
     return true;
 }
+
 void Playlist::addTrackToLib(std::string in_band, std::string in_cd, std::string in_title){
     Track *song = new Track(in_band, in_cd, in_title);
     Track *tmp=headLib;
     if (tmp==NULL){
         headLib = song;
-        //cout<<"Head: "<<headLib->title<<endl;
     }
     else{
-        while (song->band!=tmp->band && tmp->nextBand!=NULL){
+        while (song->band!=tmp->band && tmp->nextBand!=NULL)
                 tmp=tmp->nextBand;
-        }
         if (song->band==tmp->band){
-            while (song->cd!=tmp->cd && tmp->nextCD!=NULL){
+            while (song->cd!=tmp->cd && tmp->nextCD!=NULL)
                 tmp=tmp->nextCD;
-            }
             if (song->cd==tmp->cd)
                 addTrackToTree(song, tmp);
             else
@@ -98,6 +106,59 @@ void Playlist::printLib(){
         }
     }
 }
+
+void Playlist::printLibByBand(){
+    if (headLib==NULL)
+        cout<<"Music library is empty."<<endl;
+    else {
+        Track *tmpBand=headLib;
+        Track *tmpCD, *tmpTrack;
+        while (tmpBand!=NULL){
+            tmpCD=tmpBand;
+            cout<<"** "<<tmpBand->band<<" **"<<endl;
+            while (tmpCD!=NULL){
+                cout<<tmpCD->cd<<":\n";
+                tmpTrack=tmpCD;
+                printCDTreeSongOnly(tmpTrack);
+                tmpCD=tmpCD->nextCD;
+                cout<<"\n"<<endl;
+            }
+            tmpBand=tmpBand->nextBand;
+        }
+    }
+}
+
+void Playlist::searchLibByBand(){
+    cout<<"\n";
+    if (headLib==NULL)
+        cout<<"Music Library is empty."<<endl;
+    else{
+        string in_band;
+        Track *tmpBand, *tmpCD, *tmpTrack;
+        cout<<"Enter a band or artist name: ";
+        getline(cin, in_band);
+        while (in_band!="q"){
+            tmpBand=headLib;
+            while (tmpBand!=NULL && tmpBand->band!=in_band){
+                tmpBand=tmpBand->nextBand;
+            }
+            if (tmpBand->band==in_band){
+                tmpCD=tmpBand;
+                while (tmpCD!=NULL){
+                    tmpTrack=tmpCD;
+                    printCDTreeSongOnly(tmpTrack);
+                    tmpCD=tmpCD->nextCD;
+                }
+            }
+            else{
+                cout<<"Band/Artist not found."<<endl;
+                cout<<"Enter another band/artist or 'q' to return to main menu: ";
+                getline (cin, in_band);
+            }
+        }
+    }
+}
+
 void Playlist::printCDTree(Track* song){
         if (song->lChild!=NULL)
             printCDTree(song->lChild);
@@ -105,37 +166,53 @@ void Playlist::printCDTree(Track* song){
         if (song->rChild!=NULL)
             printCDTree(song->rChild);
 }
-void Playlist::searchLib(){}
+
+void Playlist::printCDTreeSongOnly(Track* song){
+        if (song->lChild!=NULL)
+            printCDTreeSongOnly(song->lChild);
+        cout<<song->title<<", ";
+        if (song->rChild!=NULL)
+            printCDTreeSongOnly(song->rChild);
+}
+
+void Playlist::searchLib(){
+    string songTitle;
+    string add;
+    Track *found;
+    cout<<"Enter a song title: ";
+    getline(cin, songTitle);
+    found = searchLibByTrack(songTitle);
+    if (found!=NULL){
+        cout<<"Found track: "<<found->title<<endl;
+        cout<<"Do you want to add it to your playlist? ('y' for yes, 'n' for no)"<<endl;
+        getline(cin, add);
+        if (add=="y"){
+            addToPL(found);
+            cout<<found->title<<" has been added!"<<endl;
+        }
+    }
+    else
+        cout<<"Track not found."<<endl;
+
+}
 
 Track *Playlist::searchLibByTrack(std::string song){
     Track *tmpTrack;
     Track *tmpCD;
     Track *tmpBand=headLib;
-    std::string seval;
     int compareVal;
-    int a;
     while (tmpBand!=NULL){
         tmpCD=tmpBand;
         while (tmpCD!=NULL){
             tmpTrack=tmpCD;
             while (tmpTrack!=NULL){
-                seval=tmpTrack->title;
-                a=seval.size();
-                cout<<"seval: "<<seval<<endl;
-                compareVal=song.compare(seval);
-                cout<<"Looking at: "<<seval<<endl;
-                cout<<"Size: "<<a;
-                cout<<" Compare value is: "<<compareVal<<endl;
+                compareVal=song.compare(tmpTrack->title);
                 if (compareVal<0)
                     tmpTrack=tmpTrack->lChild;
                 else if (compareVal>0)
                     tmpTrack=tmpTrack->rChild;
-                else if (compareVal==0)
-                    return tmpTrack;
-                if (tmpTrack==NULL)
-                    cout<<"At end of while loop, track is NULL"<<endl;
                 else
-                    cout<<"At end of while loop, track is: "<<tmpTrack->title<<endl;
+                    return tmpTrack;
             }
             tmpCD=tmpCD->nextCD;
         }
@@ -143,41 +220,52 @@ Track *Playlist::searchLibByTrack(std::string song){
     }
     return NULL;
 }
+
 void Playlist::searchLibByCD(){}
 
-void Playlist::addToPL(){
-    std::string title;
-    Track *song;
-    cout<<"Please enter a track name and then press enter."<<endl;
-    cout<<"When you are done adding tracks, press 'q' to return to the main menu."<<endl;
-    cin>>title;
-    cin.ignore();
-    while (title!="q"){
-        song = searchLibByTrack(title);
-        if (song!=NULL)
-            q.push_back(song);
-        else
-            cout<<"Track not found. Enter another track name or press 'Q' to go back to the main menu: ";
+void Playlist::addToPL(Track *in_song){
+    if (in_song!=NULL)
+        q.push_back(in_song);
+    else{
+        std::string title;
+        Track *song;
+        cout<<"Please enter a track name and then press enter."<<endl;
+        cout<<"When you are done adding tracks, press 'q' to return to the main menu."<<endl;
         getline(cin, title);
+        while (title!="q"){
+            song = searchLibByTrack(title);
+            if (song!=NULL){
+                q.push_back(song);
+                cout<<song->title<<" added to playlist."<<endl;
+            }
+            else
+                cout<<"Track not found. Enter another track name or press 'Q' to go back to the main menu: ";
+            getline(cin, title);
+        }
     }
 }
+
 Track *Playlist::addTrackToPL(std::string song){}
 void Playlist::addCDToPL(){}
 void Playlist::removeFromPL(){}
 void Playlist::removeTrackFromPL(){}
 void Playlist::removeCDFromPL(){}
+
 void Playlist::printPL(){
     Track *dequeItem = q.front();
     int qsize=q.size();
     if (qsize==0)
         cout<<"There are no songs in the playlist."<<endl;
     else{
-        cout<<"**** Playlist ****"<<endl;
+
+        cout<<"\n"<<"************ Playlist ************"<<endl;
         for (int i=0; i<qsize; i++){
-        cout<<dequeItem[i].title<<endl;
+            cout<<q[i]->title<<endl;
         }
+        cout<<"**********************************\n"<<endl;
     }
 }
+
 void Playlist::deletePL(){}
 Track *Playlist::searchPLByTrack(std::string title){}
 Track *Playlist::searchPLByCD(std::string cd){}
