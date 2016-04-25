@@ -43,42 +43,43 @@ class Playlist
         Playlist();
         virtual ~Playlist();
         bool createLib(); //reads in track information from txt file
+        bool readInTracks();
         void addTrackToLib(std::string in_band, std::string in_cd, std::string in_title); //add individual track to music library
-        void addTrackToAlbumTree(Track *song, Track *tmp); //adds track to album tree
-        void addMusic(); //
-        void addTrack();
-        void addCD();
-        void removeMusic();
-        void removeTrack();
-        void removeCD();
-        void searchMusic();
-        void searchTrack();
-        void searchCD();
-        void printList();
+        void addTrackToTree(Track *song, Track *tmp); //adds track to album tree
         void printLib();
+        void printCDTree(Track *song);
+        void searchLib();
+        Track *searchLibByTrack(std::string song);
+        void searchLibByCD();
+        void addToPL(); //
+        Track *addTrackToPL(std::string song);
+        void addCDToPL();
+        void removeFromPL();
+        void removeTrackFromPL();
+        void removeCDFromPL();
+        void printPL();
+        void deletePL();
+        Track *searchPLByTrack(std::string title);
+        Track *searchPLByCD(std::string cd);
+
+
         void trackToFront(std::string title);
         void trackToEnd (std::string title);
         void CDtoFront (std::string cd);
         void CDtoEnd (std::string cd);
-        void deleteList();
-        Track *searchTrack(std::string title);
-        Track *searchCd(std::string cd);
 
-        //void addTrackPub();
-        //void addCDPub();
-        //void removeTrackPub();
-        //void removeCDPub();
 
     protected:
 
     private:
 
         Track *headLib;
-        //Track *lastLib;
-        //Track *headList;
-        //Track *lastList;
         int numTracks;
-        std::deque<Track> q;
+        std::deque<Track*> q;
+
+
+
+
 };
 
 #endif // PLAYLIST_H

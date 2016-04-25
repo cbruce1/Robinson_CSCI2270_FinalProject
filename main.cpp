@@ -20,6 +20,7 @@ int menu(){
     cout<<"5. View playlist"<<endl;
     cout<<"6. Quit"<<endl;
     cin>>choice;
+    cin.ignore();
     while (choice > 6 || choice <1){
         cout<<"Please enter a valid choice: ";
         cin>>choice;
@@ -31,9 +32,7 @@ int menu(){
 int main()
 {
     Playlist p;
-
-    bool fileOK = p.createLib();
-    if (!fileOK)
+    if (!p.createLib())
         return 0;
 
     int choice = menu();
@@ -41,13 +40,14 @@ int main()
         if (choice==1)
             p.printLib();
         else if (choice==2)
-            p.searchMusic();
+            p.searchLib();
         else if (choice==3)
-            p.addMusic();
+            p.addToPL();
         else if (choice==4)
-            p.removeMusic();
+            p.removeFromPL();
         else if (choice==5)
-            p.printList();
+            p.printPL();
+        choice=menu();
     }
     cout <<"Goodbye!"<<endl;
     return 0;
