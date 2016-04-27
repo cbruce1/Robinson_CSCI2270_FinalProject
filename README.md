@@ -54,7 +54,7 @@ Depending on how many songs you have in the playlist, be ready to scroll
 
 You will need access to STLs. The includes for these are written into the code so you should not have to do anything.
 
-<i>I am old. If you are unfamiliar with these bands you should ask a parent or older relative about them.</i>
+<i>Btw... I am old. If you are unfamiliar with these bands ask a parent or older relative about them. (Some of them are really good!)</i>
 
 <b>System Requirements</b>
 c++11
