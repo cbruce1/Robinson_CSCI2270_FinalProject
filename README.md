@@ -20,11 +20,13 @@ Once you have the program running you will be given the choice of 6 options:
 <li> Quit
 </ol>
 
-<li>View Library</li>
+
+<ol>
+<li>View Library
 
 Caution there are 50+ songs in the library so be ready to scroll.  
 
-<li>Search</li>
+<li>Search<
 
 If you choose to search the library you will be prompted for song title or you can enter "cd" to enter a CD title or "b" to enter a band name. All strings are case sensitive are must match the names exactly as they are written in the text file (see below). You can add as many songs as you want without returning to the main menu just hit enter after each song. 
 
@@ -38,13 +40,13 @@ Easy to type band: Prince
 
 If you search on a song, band or CD and it is found, you will have an option to add it to the playlist. Just enter "y" when prompted.
 
-<li>Add to playlist</li>
+<li>Add to playlist
 Same as above for search
 
-<li>Remove from playlist</li>
+<li>Remove from playlist
 Same as above for search
 
-<li>View playlist</li>
+<li>View playlist
 Depending on how many songs you have in the playlist, be ready to scroll
 
 <b>Dependencies</b>
