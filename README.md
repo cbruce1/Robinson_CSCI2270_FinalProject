@@ -67,8 +67,8 @@ None, but all are welcome!
 
 
 <i>For reference: Music Library</i>
-MUSIC LIBRARY FOR FINAL PROJECT
 
+MUSIC LIBRARY FOR FINAL PROJECT
 Prince,Purple Rain,Let's Go Crazy,
 
 Prince,Purple Rain,Take Me With U,
