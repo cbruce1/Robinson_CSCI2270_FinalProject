@@ -3,6 +3,11 @@
 //Final Project
 //**PLaylist**
 
+/*This program creates a playlist of songs. Users can add or delete individual songs, CDs and/or all the songs of a band
+to/from a playlist.
+The music library for the playlist is in text file.
+*/
+
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -10,13 +15,14 @@
 
 using namespace std;
 
+//menu 6 choices
+//post condition: returns an integer between one and 6.
 int menu(){
     string schoice;
     int choice = 0;
     cout<<"\n************ Main Menu ************"<<endl;
     cout<<"*                                 *"<<endl;
     cout<<"*  1) View music library          *"<<endl;
-    //cout<<" 1) View library"<<endl;
     cout<<"*  2) Search music library        *"<<endl;
     cout<<"*  3) Add music to playlist       *"<<endl;
     cout<<"*  4) Remove music from playlist  *"<<endl;
@@ -27,7 +33,6 @@ int menu(){
     cout<<"Please enter your selection: ";
     std::getline(std::cin, schoice);
     choice=stoi(schoice);
-//    cin.ignore();
     while (choice > 6 || choice <1){
         cout<<"Please enter a valid choice: ";
         std::getline(std::cin, schoice);
@@ -37,21 +42,22 @@ int menu(){
 
 }
 
+//main
+//post condition: call function in playlist class or end program
 int main()
 {
-    Playlist p;
-    if (!p.createLib())
+    Playlist p;             //class object
+    if (!p.createLib())     //read in library from a text file
         return 0;
 
     int choice = menu();
     while (choice !=6){
         if (choice==1)
             p.printLib();
-            //p.printLibByBand();
         else if (choice==2)
             p.searchLib();
         else if (choice==3)
-            p.addToPL(NULL);
+            p.addToPL();
         else if (choice==4)
             p.removeFromPL();
         else if (choice==5)
