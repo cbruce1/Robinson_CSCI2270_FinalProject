@@ -66,9 +66,11 @@ None
 None, but all are welcome!
 
 
-<i>For reference: Music Library</i>
+
+<i><b>For reference: Music Library</b></i>
 
 MUSIC LIBRARY FOR FINAL PROJECT
+
 Prince,Purple Rain,Let's Go Crazy,
 
 Prince,Purple Rain,Take Me With U,
@@ -106,7 +108,6 @@ Prince,1999,Free,
 Prince,1999,Lady Can Driver,
 
 Prince,1999,All The Critics Love U  In New York,
-
 
 Prince,1999,International Lover,
 
