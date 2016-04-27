@@ -1,10 +1,10 @@
 # Robinson_CSCI2270_FinalProject
-CSCI 2270 (S16) Final Project
+
 Project: Modified Spotify playlist
 
-Project Summary:
+<b>Project Summary:</b>
 
-This program creates a mock playlist of songs from a set of CDs. The program enables the user to view all the songs in the library, add or delete songs, CD and/or all the CDs of a band to a playlist and/or view the playlist. A "music library" is generated from a text file containing a list of songs. Each song in the list has a band name, CD name and a song title. Each of these are separated by commas (for example, one item in the list looks like this:Grateful Dead,American Beauty,Truckin'). The program reads each item in the list into a struct called a "Track." These Tracks are linked together via two linked lists - a linked list of bands and a linked list of CDs -- and binary search trees (BST) of songs. Each BST represents a CD in the music library. The nodes of the BST are Track structs. 
+This program creates a mock playlist of songs. The program enables the user to view all the songs in a music library and create, modify and view a playlist. The "music library" is generated from a list of songs in a text file. Each song in the list has a band name, CD name and a song title. (For example, one item in the list looks like this: Grateful Dead,American Beauty,Truckin'). Each item in the list is contained in a struct called a "Track" and these structs comprise the music library. The structs are connected to one another via a hybrid of linked lists and Binary Search Trees (BSTs). Each CD corresponds to one BST. The root of a CD BST links to the root of another CD BST by the same artists. The first struct created for each artist links to the first struct created for another artist. The playlist is stored in a deque (similar to a queue but you can remove objects from the middle, top or bottom.) Each item in the deque is a pointer to a Track struct. 
 
 Grateful Dead
 
