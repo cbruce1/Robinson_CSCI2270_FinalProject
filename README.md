@@ -1,6 +1,6 @@
 # Robinson_CSCI2270_FinalProject
 
-<b>Project: Modified Spotify Playlist<b>
+<b>Project: Modified Spotify Playlist</b>
 
 <b>Project Summary</b>
 
