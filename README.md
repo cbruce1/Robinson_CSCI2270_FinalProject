@@ -22,12 +22,11 @@ Once you have the program running you will be given the choice of 6 options:
 
 
 <ol>
-<li>View Library
+<li><b>View Library</b>
 
 Caution there are 50+ songs in the library so be ready to scroll.  
 
-<li>Search<
-
+<li>Search
 If you choose to search the library you will be prompted for song title or you can enter "cd" to enter a CD title or "b" to enter a band name. All strings are case sensitive are must match the names exactly as they are written in the text file (see below). You can add as many songs as you want without returning to the main menu just hit enter after each song. 
 
 To quit out of entering songs, enter "q".  
