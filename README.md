@@ -65,6 +65,7 @@ None
 <b>Contributors</b>
 None, but all are welcome!
 
+UPDATE 4/29: I just realized I have not set up the file structure according to the assignment. I will correct this after reading the other feedback. Apologies in advance. 
 
 
 <i><b>For reference: Music Library</b></i>
