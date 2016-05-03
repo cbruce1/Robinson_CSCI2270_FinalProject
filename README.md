@@ -8,7 +8,14 @@ This program creates a mock playlist of songs. The program enables the user to v
 
 <b>How to Run</b>
 
-To run the file you will need to compile and run main.cpp, Playlist.h and Playlist.cpp. MusicLibrary.txt must be in the same directory as main.cpp in order for the program to run properly. 
+To run the file you will need to compile and run main.cpp, Playlist.h and Playlist.cpp. MusicLibrary.txt must be in the same directory as main.cpp in order for the program to run properly. c++11 required.
+
+To run from a terminal window:
+
+g++ -std=c++11 main.cpp Playlist.h Playlist.cpp
+
+./a.out
+
 
 Once you have the program running you will be given the choice of 6 options:
 <ol>
@@ -33,8 +40,11 @@ To quit out of entering songs, enter "q".
 If you enter "cd" or "b" you will be prompted for a cd title or band name.  To quit our of this enter "q"
 
 Easy to type songs (these must be entered individually): 1999, Sunrise, Girls, Free, Unite, Coma
+
 Easy to type CD: 1999
+
 Easy to type band: Prince
+
 
 If you search on a song, band or CD and it is found, you will have an option to add it to the playlist. Just enter "y" when prompted.
 
